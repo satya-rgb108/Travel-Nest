@@ -3,6 +3,7 @@ import cors from "cors";
 import "dotenv/config";
 import mongoose from 'mongoose';
 import userRoutes from "./routes/users.routes";
+import authRoutes from "./routes/auth.routes"
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string);
 
@@ -11,6 +12,8 @@ app.use(express.json())//This code helps to convert the body of API requests int
 app.use(express.urlencoded({ extended: true }))//this code helps us to parse the url to get the create parameters and things like that
 
 app.use(cors())
+
+app.use("/api/auth", authRoutes);
 
 app.use("/api/users", userRoutes);
 
